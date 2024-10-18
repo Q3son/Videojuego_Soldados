@@ -1,5 +1,6 @@
 import java.util.*;
-//BY: SUBIA_EDSON_FP2
+// BY: SUBIA_EDSON_FP2
+
 public class Videojuego2 {
 
     private static final int TAMAÑO_TABLERO = 10; // Tablero de 10x10
@@ -7,17 +8,19 @@ public class Videojuego2 {
     private Soldado[] soldados;
     private int cantidadSoldados;
 
+    // 1. Constructor para inicializar el juego con un número determinado de soldados
     public Videojuego2(int cantidad) {
         tablero = new Soldado[TAMAÑO_TABLERO][TAMAÑO_TABLERO];
         soldados = new Soldado[cantidad];
         this.cantidadSoldados = cantidad;
-        inicializarSoldados();
+        inicializarSoldados(); // Inicializa los soldados en el tablero
     }
 
+    // 2. Método para crear soldados de manera aleatoria en el tablero
     private void inicializarSoldados() {
         Random random = new Random();
         int soldadosCreados = 0;
-    
+        
         while (soldadosCreados < cantidadSoldados) {
             int fila = random.nextInt(TAMAÑO_TABLERO);
             int columna = random.nextInt(TAMAÑO_TABLERO);
@@ -31,45 +34,33 @@ public class Videojuego2 {
             }
         }
     }
-    
 
+    // 3. Método para mostrar el tablero en la consola
     public void mostrarTablero() {
-        // Imprimir la cabecera del tablero
         System.out.println("Tablero de Soldados:");
-    
-        // Crear una línea divisoria que ocupe todo el ancho del tablero
-        String lineaDivisoria = new String(new char[100]).replace("\0", "-"); // Línea divisoria de 110 caracteres
-    
-        // Mostrar el tablero en formato de celdas
-        for (int fila = 0; fila < 10; fila++) {
-            // Imprimir línea divisoria para la fila
+        String lineaDivisoria = new String(new char[100]).replace("\0", "-");
+        
+        for (int fila = 0; fila < TAMAÑO_TABLERO; fila++) {
             System.out.println(lineaDivisoria);
-            System.out.print("|"); // Iniciar la fila con una barra vertical
-    
-            for (int columna = 0; columna < 10; columna++) {
-                // Variable para almacenar el contenido de la celda
-                String celda = "         "; // Espacio vacío para 9 caracteres
-    
-                for (int i = 0; i < soldados.length; i++) {
-                    if (soldados[i] != null && soldados[i].getFila() == fila && soldados[i].getColumna() == columna) {
-                        // Si hay un soldado en esta posición, actualizamos la celda
-                        celda = String.format("%-9s", soldados[i].getNombre()); // Asignar el nombre del soldado con formato
+            System.out.print("|");
+            
+            for (int columna = 0; columna < TAMAÑO_TABLERO; columna++) {
+                String celda = "         "; // Espacio vacío
+                for (Soldado soldado : soldados) {
+                    if (soldado != null && soldado.getFila() == fila && soldado.getColumna() == columna) {
+                        celda = String.format("%-9s", soldado.getNombre()); // Asignar el nombre del soldado
                         break;
                     }
                 }
-    
-                // Imprimir la celda con el contenido
-                System.out.print(celda + "|"); // Concatenar con el símbolo de celda
+                System.out.print(celda + "|"); // Imprimir la celda
             }
-            // Finalizar la fila
             System.out.println(); // Nueva línea para la siguiente fila
         }
-    
-        // Imprimir la línea divisoria al final
-        System.out.println(lineaDivisoria); // Imprimir línea divisoria final
+        
+        System.out.println(lineaDivisoria); // Línea divisoria final
     }
-          
 
+    // 4. Método para encontrar el soldado con mayor nivel de vida
     public Soldado soldadoConMayorVida() {
         Soldado maxSoldado = soldados[0]; // Asume que hay al menos un soldado
         for (int i = 1; i < cantidadSoldados; i++) {
@@ -80,6 +71,7 @@ public class Videojuego2 {
         return maxSoldado;
     }
 
+    // 5. Método para calcular el promedio de nivel de vida de los soldados
     public double promedioNivelVida() {
         int suma = 0;
         for (int i = 0; i < cantidadSoldados; i++) {
@@ -88,6 +80,7 @@ public class Videojuego2 {
         return (double) suma / cantidadSoldados;
     }
 
+    // 6. Método para calcular el nivel de vida total del ejército
     public int nivelVidaTotal() {
         int total = 0;
         for (int i = 0; i < cantidadSoldados; i++) {
@@ -96,6 +89,7 @@ public class Videojuego2 {
         return total;
     }
 
+    // 7. Método para mostrar los datos de todos los soldados
     public void mostrarDatosSoldados() {
         System.out.println("Datos de todos los soldados en orden de creación:");
         for (int i = 0; i < cantidadSoldados; i++) {
@@ -104,6 +98,7 @@ public class Videojuego2 {
         System.out.println();
     }
 
+    // 8. Método para clasificar soldados por poder (nivel de vida)
     public void rankingDePoder() {
         // Ordenamiento por selección (mejorado)
         for (int i = 0; i < cantidadSoldados - 1; i++) {
@@ -128,8 +123,9 @@ public class Videojuego2 {
         System.out.println();
     }
 
+    // 9. Método para clasificar soldados por nombre
     public void rankingPorNombre() {
-        // Ordenamiento burbuja (mejorado para reducir el número de comparaciones)
+        // Ordenamiento burbuja (mejorado)
         boolean Cambiazo;
         for (int i = 0; i < cantidadSoldados - 1; i++) {
             Cambiazo = false;
@@ -152,6 +148,7 @@ public class Videojuego2 {
         System.out.println();
     }
 
+    // 10. Método principal para ejecutar el juego
     public static void main(String[] args) {
         Videojuego2 juego = new Videojuego2(10); // Cambia la cantidad de soldados si lo necesitas
         juego.mostrarTablero();
@@ -159,7 +156,7 @@ public class Videojuego2 {
         System.out.println("Promedio de nivel de vida: " + juego.promedioNivelVida());
         System.out.println("Nivel de vida total del ejército: " + juego.nivelVidaTotal());
         juego.mostrarDatosSoldados();
-        juego.rankingDePoder();
-        juego.rankingPorNombre(); // Muestra ranking por nombre
+        juego.rankingDePoder(); // Método para ordenar por poder (nivel de vida)
+        juego.rankingPorNombre(); // Método para ordenar por nombre
     }
 }

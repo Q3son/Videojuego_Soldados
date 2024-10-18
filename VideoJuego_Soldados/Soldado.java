@@ -1,5 +1,4 @@
 //BY: SUBIA_EDSON_FP2
-
 public class Soldado {
     private String nombre;
     private int nivelVida;
