@@ -1,7 +1,7 @@
 import java.util.*;
 //BY: SUBIA_EDSON_FP2
 public class Videojuego2 {
-    
+
     private static final int TAMAÑO_TABLERO = 10; // Tablero de 10x10
     private Soldado[][] tablero;
     private Soldado[] soldados;
@@ -17,35 +17,58 @@ public class Videojuego2 {
     private void inicializarSoldados() {
         Random random = new Random();
         int soldadosCreados = 0;
-
+    
         while (soldadosCreados < cantidadSoldados) {
             int fila = random.nextInt(TAMAÑO_TABLERO);
             int columna = random.nextInt(TAMAÑO_TABLERO);
             if (tablero[fila][columna] == null) { // Verifica que el espacio esté vacío
-                String nombre = "Soldado" + soldadosCreados;
+                String nombre = "Soldado" + soldadosCreados; // Nombre del soldado
                 int nivelVida = random.nextInt(5) + 1; // Nivel de vida entre 1 y 5
                 Soldado soldado = new Soldado(nombre, nivelVida, fila, columna);
-                tablero[fila][columna] = soldado;
-                soldados[soldadosCreados] = soldado;
-                soldadosCreados++;
+                tablero[fila][columna] = soldado; // Asignar el soldado al tablero
+                soldados[soldadosCreados] = soldado; // Guardar el soldado en el array
+                soldadosCreados++; // Incrementar el contador de soldados creados
             }
         }
     }
+    
 
     public void mostrarTablero() {
-        System.out.println("Tablero de soldados:");
-        for (int i = 0; i < TAMAÑO_TABLERO; i++) {
-            for (int j = 0; j < TAMAÑO_TABLERO; j++) {
-                if (tablero[i][j] != null) {
-                    System.out.print("| S" + tablero[i][j].getNombre().substring(7) + " "); // "S" y el número de soldado
-                } else {
-                    System.out.print("|   ");
+        // Imprimir la cabecera del tablero
+        System.out.println("Tablero de Soldados:");
+    
+        // Crear una línea divisoria que ocupe todo el ancho del tablero
+        String lineaDivisoria = new String(new char[100]).replace("\0", "-"); // Línea divisoria de 110 caracteres
+    
+        // Mostrar el tablero en formato de celdas
+        for (int fila = 0; fila < 10; fila++) {
+            // Imprimir línea divisoria para la fila
+            System.out.println(lineaDivisoria);
+            System.out.print("|"); // Iniciar la fila con una barra vertical
+    
+            for (int columna = 0; columna < 10; columna++) {
+                // Variable para almacenar el contenido de la celda
+                String celda = "         "; // Espacio vacío para 9 caracteres
+    
+                for (int i = 0; i < soldados.length; i++) {
+                    if (soldados[i] != null && soldados[i].getFila() == fila && soldados[i].getColumna() == columna) {
+                        // Si hay un soldado en esta posición, actualizamos la celda
+                        celda = String.format("%-9s", soldados[i].getNombre()); // Asignar el nombre del soldado con formato
+                        break;
+                    }
                 }
+    
+                // Imprimir la celda con el contenido
+                System.out.print(celda + "|"); // Concatenar con el símbolo de celda
             }
-            System.out.println("|");
+            // Finalizar la fila
+            System.out.println(); // Nueva línea para la siguiente fila
         }
-        System.out.println();
+    
+        // Imprimir la línea divisoria al final
+        System.out.println(lineaDivisoria); // Imprimir línea divisoria final
     }
+          
 
     public Soldado soldadoConMayorVida() {
         Soldado maxSoldado = soldados[0]; // Asume que hay al menos un soldado
@@ -107,19 +130,19 @@ public class Videojuego2 {
 
     public void rankingPorNombre() {
         // Ordenamiento burbuja (mejorado para reducir el número de comparaciones)
-        boolean swapped;
+        boolean Cambiazo;
         for (int i = 0; i < cantidadSoldados - 1; i++) {
-            swapped = false;
+            Cambiazo = false;
             for (int j = 0; j < cantidadSoldados - 1 - i; j++) {
                 if (soldados[j].getNombre().compareTo(soldados[j + 1].getNombre()) > 0) {
                     // Intercambio
                     Soldado temp = soldados[j];
                     soldados[j] = soldados[j + 1];
                     soldados[j + 1] = temp;
-                    swapped = true;
+                    Cambiazo = true;
                 }
             }
-            if (!swapped) break; // Si no hubo intercambios, el array ya está ordenado
+            if (!Cambiazo) break; // Si no hubo intercambios, el array ya está ordenado
         }
 
         System.out.println("Ranking de soldados por nombre:");
