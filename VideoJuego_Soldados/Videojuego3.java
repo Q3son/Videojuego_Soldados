@@ -8,7 +8,7 @@ public class Videojuego3 {
     private ArrayList<Soldado> ejercito1;
     private ArrayList<Soldado> ejercito2;
 
-    // Constructor para inicializar el juego con soldados en ambos ejércitos
+    // 1. Constructor para inicializar el juego con soldados en ambos ejércitos
     public Videojuego3(int cantidadSoldadosEjercito1, int cantidadSoldadosEjercito2) {
         tablero = new ArrayList<>(TAMAÑO_TABLERO);
         for (int i = 0; i < TAMAÑO_TABLERO; i++) {
@@ -25,7 +25,7 @@ public class Videojuego3 {
         inicializarEjercito(ejercito2, cantidadSoldadosEjercito2, "X2");
     }
 
-    // Método para inicializar un ejército con soldados aleatorios
+    // 2. Método para inicializar un ejército con soldados aleatorios
     private void inicializarEjercito(ArrayList<Soldado> ejercito, int cantidad, String etiquetaEjercito) {
         Random random = new Random();
         int soldadosCreados = 0;
@@ -45,7 +45,7 @@ public class Videojuego3 {
         }
     }
 
-    // Método para mostrar el tablero en la consola
+    // 3. Método para mostrar el tablero en la consola
     public void mostrarTablero() {
         System.out.println("Tablero de Soldados:");
         String lineaDivisoria = new String(new char[100]).replace("\0", "-");
@@ -69,7 +69,7 @@ public class Videojuego3 {
         System.out.println(lineaDivisoria); // Línea divisoria final
     }
 
-    // Método para mostrar datos del soldado con mayor nivel de vida de un ejército
+    // 4. Método para mostrar datos del soldado con mayor nivel de vida de un ejército
     public Soldado soldadoConMayorVida(ArrayList<Soldado> ejercito) {
         Soldado maxSoldado = ejercito.get(0);
         for (Soldado soldado : ejercito) {
@@ -80,7 +80,7 @@ public class Videojuego3 {
         return maxSoldado;
     }
 
-    // Método para calcular el promedio de nivel de vida de un ejército
+    // 5. Método para calcular el promedio de nivel de vida de un ejército
     public double promedioNivelVida(ArrayList<Soldado> ejercito) {
         int suma = 0;
         for (Soldado soldado : ejercito) {
@@ -89,7 +89,7 @@ public class Videojuego3 {
         return (double) suma / ejercito.size();
     }
 
-    // Método para calcular el nivel de vida total de un ejército
+    // 6. Método para calcular el nivel de vida total de un ejército
     public int nivelVidaTotal(ArrayList<Soldado> ejercito) {
         int total = 0;
         for (Soldado soldado : ejercito) {
@@ -98,7 +98,7 @@ public class Videojuego3 {
         return total;
     }
 
-    // Método para mostrar datos de los soldados de un ejército
+    // 7. Método para mostrar datos de los soldados de un ejército
     public void mostrarDatosEjercito(ArrayList<Soldado> ejercito, String nombreEjercito) {
         System.out.println("Datos de los soldados en " + nombreEjercito + " en orden de creación:");
         for (Soldado soldado : ejercito) {
@@ -130,7 +130,7 @@ public class Videojuego3 {
         System.out.println();
     }
 
-    // Método para decidir cuál ejército gana la batalla en función del total de vida
+    // 8. Método para decidir cuál ejército gana la batalla en función del total de vida
     public void determinarGanador() {
         int vidaTotalEjercito1 = nivelVidaTotal(ejercito1);
         int vidaTotalEjercito2 = nivelVidaTotal(ejercito2);
@@ -147,7 +147,7 @@ public class Videojuego3 {
         }
     }
 
-    // Método principal para ejecutar el juego
+    // 9. Método principal para ejecutar el juego
     public static void main(String[] args) {
         Videojuego3 juego = new Videojuego3(10, 10); // Inicia el juego con 10 soldados en cada ejército
         juego.mostrarTablero();
