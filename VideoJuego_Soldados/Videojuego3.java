@@ -150,7 +150,7 @@ public class Videojuego3 {
 
     // 10. Método principal para ejecutar el juego
     public static void main(String[] args) {
-        Videojuego2 juego = new Videojuego2(10); // Cambia la cantidad de soldados si lo necesitas
+        Videojuego3 juego = new Videojuego3(10); // Cambia la cantidad de soldados si lo necesitas
         juego.mostrarTablero();
         System.out.println("Soldado con mayor nivel de vida: " + juego.soldadoConMayorVida());
         System.out.println("Promedio de nivel de vida: " + juego.promedioNivelVida());
