@@ -26,16 +26,18 @@ public class Videojuego3 {
     private void inicializarSoldados() {
         Random random = new Random();
         int soldadosCreados = 0;
-        
+
         while (soldadosCreados < cantidadSoldados) {
             int fila = random.nextInt(TAMAÑO_TABLERO);
             int columna = random.nextInt(TAMAÑO_TABLERO);
-            if (tablero[fila][columna] == null) { // Verifica que el espacio esté vacío
+
+            if (tablero.get(fila).get(columna) == null) { // Verifica que el espacio esté vacío
                 String nombre = "Soldado" + soldadosCreados; // Nombre del soldado
                 int nivelVida = random.nextInt(5) + 1; // Nivel de vida entre 1 y 5
                 Soldado soldado = new Soldado(nombre, nivelVida, fila, columna);
-                tablero[fila][columna] = soldado; // Asignar el soldado al tablero
-                soldados[soldadosCreados] = soldado; // Guardar el soldado en el array
+
+                tablero.get(fila).set(columna, soldado); // Asignar el soldado al tablero
+                soldados.add(soldado); // Guardar el soldado en la lista
                 soldadosCreados++; // Incrementar el contador de soldados creados
             }
         }
