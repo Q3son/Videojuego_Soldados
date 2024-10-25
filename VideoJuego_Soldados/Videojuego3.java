@@ -70,10 +70,10 @@ public class Videojuego3 {
 
     // 4. Método para encontrar el soldado con mayor nivel de vida
     public Soldado soldadoConMayorVida() {
-        Soldado maxSoldado = soldados[0]; // Asume que hay al menos un soldado
+        Soldado maxSoldado = soldados.get(0); // Asume que hay al menos un soldado
         for (int i = 1; i < cantidadSoldados; i++) {
-            if (soldados[i].getNivelVida() > maxSoldado.getNivelVida()) {
-                maxSoldado = soldados[i];
+            if (soldados.get(i).getNivelVida() > maxSoldado.getNivelVida()) {
+                maxSoldado = soldados.get(i);
             }
         }
         return maxSoldado;
@@ -83,7 +83,7 @@ public class Videojuego3 {
     public double promedioNivelVida() {
         int suma = 0;
         for (int i = 0; i < cantidadSoldados; i++) {
-            suma += soldados[i].getNivelVida();
+            suma += soldados.get(i).getNivelVida();
         }
         return (double) suma / cantidadSoldados;
     }
@@ -92,7 +92,7 @@ public class Videojuego3 {
     public int nivelVidaTotal() {
         int total = 0;
         for (int i = 0; i < cantidadSoldados; i++) {
-            total += soldados[i].getNivelVida();
+            total += soldados.get(i).getNivelVida();
         }
         return total;
     }
