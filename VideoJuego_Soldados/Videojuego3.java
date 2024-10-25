@@ -107,7 +107,7 @@ public class Videojuego3 {
         System.out.println();
     }
 
-    // Método para ordenar soldados de un ejército por poder (nivel de vida) - Algoritmo de selección
+    // 8. Método para ordenar soldados de un ejército por poder (nivel de vida) - Algoritmo de selección
     public void rankingDePoder(ArrayList<Soldado> ejercito) {
         for (int i = 0; i < ejercito.size() - 1; i++) {
             int indexMax = i;
@@ -130,7 +130,7 @@ public class Videojuego3 {
         System.out.println();
     }
 
-    // 8. Método para decidir cuál ejército gana la batalla en función del total de vida
+    // 9. Método para decidir cuál ejército gana la batalla en función del total de vida
     public void determinarGanador() {
         int vidaTotalEjercito1 = nivelVidaTotal(ejercito1);
         int vidaTotalEjercito2 = nivelVidaTotal(ejercito2);
@@ -147,7 +147,7 @@ public class Videojuego3 {
         }
     }
 
-    // 9. Método principal para ejecutar el juego
+    // 10. Método principal para ejecutar el juego
     public static void main(String[] args) {
         Videojuego3 juego = new Videojuego3(10, 10); // Inicia el juego con 10 soldados en cada ejército
         juego.mostrarTablero();
