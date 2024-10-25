@@ -100,58 +100,50 @@ public class Videojuego3 {
     // 7. Método para mostrar los datos de todos los soldados
     public void mostrarDatosSoldados() {
         System.out.println("Datos de todos los soldados en orden de creación:");
-        for (int i = 0; i < cantidadSoldados; i++) {
-            System.out.println(soldados[i]);
+        for (Soldado soldado : soldados) {
+            System.out.println(soldado);
         }
         System.out.println();
     }
 
-    // 8. Método para clasificar soldados por poder (nivel de vida)
+    // 8. Método para clasificar soldados por poder (nivel de vida) usando burbuja
     public void rankingDePoder() {
-        // Ordenamiento por selección (mejorado)
-        for (int i = 0; i < cantidadSoldados - 1; i++) {
-            int indexMax = i;
-            for (int j = i + 1; j < cantidadSoldados; j++) {
-                if (soldados[j].getNivelVida() > soldados[indexMax].getNivelVida()) {
-                    indexMax = j;
+        // Ordenamiento manual usando método burbuja
+        for (int i = 0; i < soldados.size() - 1; i++) {
+            for (int j = 0; j < soldados.size() - 1 - i; j++) {
+                if (soldados.get(j).getNivelVida() < soldados.get(j + 1).getNivelVida()) {
+                    // Intercambiar soldados
+                    Soldado temp = soldados.get(j);
+                    soldados.set(j, soldados.get(j + 1));
+                    soldados.set(j + 1, temp);
                 }
-            }
-            // Solo intercambiar si es necesario
-            if (indexMax != i) {
-                Soldado temp = soldados[indexMax];
-                soldados[indexMax] = soldados[i];
-                soldados[i] = temp;
             }
         }
 
         System.out.println("Ranking de poder de los soldados (ordenados por nivel de vida):");
-        for (int i = 0; i < cantidadSoldados; i++) {
-            System.out.println(soldados[i]);
+        for (Soldado soldado : soldados) {
+            System.out.println(soldado);
         }
         System.out.println();
     }
 
-    // 9. Método para clasificar soldados por nombre
+    // 9. Método para clasificar soldados por nombre usando burbuja
     public void rankingPorNombre() {
-        // Ordenamiento burbuja (mejorado)
-        boolean Cambiazo;
-        for (int i = 0; i < cantidadSoldados - 1; i++) {
-            Cambiazo = false;
-            for (int j = 0; j < cantidadSoldados - 1 - i; j++) {
-                if (soldados[j].getNombre().compareTo(soldados[j + 1].getNombre()) > 0) {
-                    // Intercambio
-                    Soldado temporal = soldados[j];
-                    soldados[j] = soldados[j + 1];
-                    soldados[j + 1] = temporal;
-                    Cambiazo = true;
+        // Ordenamiento manual usando método burbuja
+        for (int i = 0; i < soldados.size() - 1; i++) {
+            for (int j = 0; j < soldados.size() - 1 - i; j++) {
+                if (soldados.get(j).getNombre().compareTo(soldados.get(j + 1).getNombre()) > 0) {
+                    // Intercambiar soldados
+                    Soldado temp = soldados.get(j);
+                    soldados.set(j, soldados.get(j + 1));
+                    soldados.set(j + 1, temp);
                 }
             }
-            if (!Cambiazo) break; // Si no hubo intercambios, el array ya está ordenado
         }
 
         System.out.println("Ranking de soldados por nombre:");
-        for (int i = 0; i < cantidadSoldados; i++) {
-            System.out.println(soldados[i]);
+        for (Soldado soldado : soldados) {
+            System.out.println(soldado);
         }
         System.out.println();
     }
