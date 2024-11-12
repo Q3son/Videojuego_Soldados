@@ -134,7 +134,29 @@ public class Videojuego4 {
         }
         System.out.println();
     }
-    // 9. Método para decidir cuál ejército gana la batalla en función del total de vida
+    // 9. Nuevo método para ordenar soldados de un ejército por nombre (algoritmo de burbuja)
+    public void ordenarPorNombre(ArrayList<Soldado> ejercito) {
+        boolean intercambioRealizado;
+        do {
+            intercambioRealizado = false;
+            for (int i = 0; i < ejercito.size() - 1; i++) {
+                if (ejercito.get(i).getNombre().compareTo(ejercito.get(i + 1).getNombre()) > 0) {
+                    Soldado temp = ejercito.get(i);
+                    ejercito.set(i, ejercito.get(i + 1));
+                    ejercito.set(i + 1, temp);
+                    intercambioRealizado = true;
+                }
+            }
+        } while (intercambioRealizado);
+
+        System.out.println("Soldados en " + (ejercito == ejercito1 ? "Ejército 1" : "Ejército 2") + " ordenados por nombre:");
+        for (Soldado soldado : ejercito) {
+            System.out.println(soldado);
+        }
+        System.out.println();
+    }
+
+    // 10. Método para decidir cuál ejército gana la batalla en función del total de vida
     public void determinarGanador() {
         int vidaTotalEjercito1 = nivelVidaTotal(ejercito1);
         int vidaTotalEjercito2 = nivelVidaTotal(ejercito2);
