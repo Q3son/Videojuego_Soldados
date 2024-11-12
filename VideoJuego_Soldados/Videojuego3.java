@@ -48,7 +48,7 @@ public class Videojuego3 {
     // 3. Método para mostrar el tablero en la consola
     public void mostrarTablero() {
         System.out.println("Tablero de Soldados:");
-        String lineaDivisoria = new String(new char[110]).replace("\0", "-");
+        String lineaDivisoria = new String(new char[11 0]).replace("\0", "-");
 
         for (int fila = 0; fila < TAMAÑO_TABLERO; fila++) {
             System.out.println(lineaDivisoria);
