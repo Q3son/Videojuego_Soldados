@@ -134,7 +134,6 @@ public class Videojuego4 {
         }
         System.out.println();
     }
-
     // 9. Método para decidir cuál ejército gana la batalla en función del total de vida
     public void determinarGanador() {
         int vidaTotalEjercito1 = nivelVidaTotal(ejercito1);
