@@ -175,21 +175,31 @@ public class Videojuego4 {
 
     // 10. Método principal para ejecutar el juego
     public static void main(String[] args) {
-        Videojuego4 juego = new Videojuego4(10, 10); // Inicia el juego con 10 soldados en cada ejército
-        juego.mostrarTablero();
-        
-        System.out.println("Soldado con mayor nivel de vida en Ejército 1: " + juego.soldadoConMayorVida(juego.ejercito1));
-        System.out.println("Soldado con mayor nivel de vida en Ejército 2: " + juego.soldadoConMayorVida(juego.ejercito2));
-
-        System.out.println("Promedio de nivel de vida en Ejército 1: " + juego.promedioNivelVida(juego.ejercito1));
-        System.out.println("Promedio de nivel de vida en Ejército 2: " + juego.promedioNivelVida(juego.ejercito2));
-
-        juego.mostrarDatosEjercito(juego.ejercito1, "Ejército 1");
-        juego.mostrarDatosEjercito(juego.ejercito2, "Ejército 2");
-
-        juego.rankingDePoder(juego.ejercito1);
-        juego.rankingDePoder(juego.ejercito2);
-
-        juego.determinarGanador();
+        Scanner scanPro = new Scanner(System.in);
+        boolean jugarOtraVez = true;
+    
+        while (jugarOtraVez) {
+            Videojuego4 juego = new Videojuego4(10, 10); // Inicia el juego con 10 soldados en cada ejército
+            juego.mostrarTablero();
+    
+            System.out.println("Soldado con mayor nivel de vida en Ejército 1: " + juego.soldadoConMayorVida(juego.ejercito1));
+            System.out.println("Soldado con mayor nivel de vida en Ejército 2: " + juego.soldadoConMayorVida(juego.ejercito2));
+    
+            System.out.println("Promedio de nivel de vida en Ejército 1: " + juego.promedioNivelVida(juego.ejercito1));
+            System.out.println("Promedio de nivel de vida en Ejército 2: " + juego.promedioNivelVida(juego.ejercito2));
+    
+            juego.mostrarDatosEjercito(juego.ejercito1, "Ejército 1");
+            juego.mostrarDatosEjercito(juego.ejercito2, "Ejército 2");
+    
+            juego.rankingDePoder(juego.ejercito1);
+            juego.rankingDePoder(juego.ejercito2);
+    
+            juego.determinarGanador();
+    
+            System.out.print("¿Quieres jugar otra vez? (s/n): ");
+            String respuesta = scanPro.nextLine().trim().toLowerCase();
+            jugarOtraVez = respuesta.equals("s");
+        }
+        System.out.println("¡Gracias por jugar!");
     }
 }
