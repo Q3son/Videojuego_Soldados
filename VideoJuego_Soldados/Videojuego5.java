@@ -19,24 +19,26 @@ public class Videojuego5 {
     }
 
     // 2. Método para inicializar un ejército con soldados aleatorios
-    private void inicializarEjercito(ArrayList<Soldado> ejercito, int cantidad, String etiquetaEjercito) {
+    private void inicializarEjercito(HashMap<String, Soldado> ejercito, int cantidad, String etiquetaEjercito) {
         Random random = new Random();
         int soldadosCreados = 0;
 
         while (soldadosCreados < cantidad) {
             int fila = random.nextInt(TAMAÑO_TABLERO);
             int columna = random.nextInt(TAMAÑO_TABLERO);
-            if (tablero.get(fila).get(columna) == null) { // Verifica que el espacio esté vacío
+
+            if (tablero[fila][columna] == null) { // Verifica que el espacio esté vacío
                 String nombre = "Soldado" + soldadosCreados + etiquetaEjercito;
                 int nivelVida = random.nextInt(5) + 1;
                 Soldado soldado = new Soldado(nombre, nivelVida, fila, columna);
-                
-                tablero.get(fila).set(columna, soldado); // Asignar el soldado al tablero
-                ejercito.add(soldado); // Guardar el soldado en el ejército
+
+                tablero[fila][columna] = soldado; // Asignar el soldado al tablero
+                ejercito.put(nombre, soldado); // Guardar el soldado en el HashMap
                 soldadosCreados++;
             }
         }
     }
+
 
     // 3. Método para mostrar el tablero en la consola
     public void mostrarTablero() {
