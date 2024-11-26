@@ -119,29 +119,32 @@ public class Videojuego5 {
         }
     }
 
-    // 10. Método principal para ejecutar el juego
+    // 8. Método principal para ejecutar el juego
     public static void main(String[] args) {
         Scanner scanPro = new Scanner(System.in);
         boolean jugarOtraVez = true;
-    
+
         while (jugarOtraVez) {
             Videojuego4 juego = new Videojuego4(10, 10); // Inicia el juego con 10 soldados en cada ejército
             juego.mostrarTablero();
-    
+
             System.out.println("Soldado con mayor nivel de vida en Ejército 1: " + juego.soldadoConMayorVida(juego.ejercito1));
             System.out.println("Soldado con mayor nivel de vida en Ejército 2: " + juego.soldadoConMayorVida(juego.ejercito2));
-    
+
             System.out.println("Promedio de nivel de vida en Ejército 1: " + juego.promedioNivelVida(juego.ejercito1));
             System.out.println("Promedio de nivel de vida en Ejército 2: " + juego.promedioNivelVida(juego.ejercito2));
-    
-            juego.mostrarDatosEjercito(juego.ejercito1, "Ejército 1");
-            juego.mostrarDatosEjercito(juego.ejercito2, "Ejército 2");
-    
-            juego.rankingDePoder(juego.ejercito1);
-            juego.rankingDePoder(juego.ejercito2);
-    
+
+            List<Soldado> ranking1 = juego.rankingMergeSort(juego.ejercito1);
+            List<Soldado> ranking2 = juego.rankingMergeSort(juego.ejercito2);
+
+            System.out.println("Ranking de poder del Ejército 1:");
+            ranking1.forEach(System.out::println);
+
+            System.out.println("Ranking de poder del Ejército 2:");
+            ranking2.forEach(System.out::println);
+
             juego.determinarGanador();
-    
+
             System.out.print("¿Quieres jugar otra vez? (s/n): ");
             String respuesta = scanPro.nextLine().trim().toLowerCase();
             jugarOtraVez = respuesta.equals("s");
