@@ -179,7 +179,7 @@ public class Videojuego4 {
         boolean jugarOtraVez = true;
     
         while (jugarOtraVez) {
-            Videojuego4 juego = new Videojuego4(10, 10); // Inicia el juego con 10 soldados en cada ejército
+            Videojuego5 juego = new Videojuego5(10, 10); // Inicia el juego con 10 soldados en cada ejército
             juego.mostrarTablero();
     
             System.out.println("Soldado con mayor nivel de vida en Ejército 1: " + juego.soldadoConMayorVida(juego.ejercito1));
