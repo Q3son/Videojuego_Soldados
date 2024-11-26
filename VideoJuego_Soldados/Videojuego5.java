@@ -4,22 +4,15 @@ import java.util.*;
 public class Videojuego5 {
 
     private static final int TAMAÑO_TABLERO = 10; // Tablero de 10x10
-    private ArrayList<ArrayList<Soldado>> tablero;
-    private ArrayList<Soldado> ejercito1;
-    private ArrayList<Soldado> ejercito2;
+    private Soldado[][] tablero;
+    private HashMap<String, Soldado> ejercito1; // NUEVO: HashMap para Ejército 1
+    private HashMap<String, Soldado> ejercito2; // NUEVO: HashMap para Ejército 2
 
     // 1. Constructor para inicializar el juego con soldados en ambos ejércitos
     public Videojuego5(int cantidadSoldadosEjercito1, int cantidadSoldadosEjercito2) {
-        tablero = new ArrayList<>(TAMAÑO_TABLERO);
-        for (int i = 0; i < TAMAÑO_TABLERO; i++) {
-            tablero.add(new ArrayList<>(TAMAÑO_TABLERO));
-            for (int j = 0; j < TAMAÑO_TABLERO; j++) {
-                tablero.get(i).add(null);
-            }
-        }
-        
-        ejercito1 = new ArrayList<>(cantidadSoldadosEjercito1);
-        ejercito2 = new ArrayList<>(cantidadSoldadosEjercito2);
+        tablero = new Soldado[TAMAÑO_TABLERO][TAMAÑO_TABLERO];
+        ejercito1 = new HashMap<>();
+        ejercito2 = new HashMap<>();
 
         inicializarEjercito(ejercito1, cantidadSoldadosEjercito1, "X1");
         inicializarEjercito(ejercito2, cantidadSoldadosEjercito2, "X2");
