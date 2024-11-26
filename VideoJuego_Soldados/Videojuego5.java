@@ -43,44 +43,27 @@ public class Videojuego5 {
     // 3. Método para mostrar el tablero en la consola
     public void mostrarTablero() {
         System.out.println("Tablero de Soldados:");
-        String lineaDivisoria = new String(new char[110]).replace("\0", "-");
-
         for (int fila = 0; fila < TAMAÑO_TABLERO; fila++) {
-            System.out.println(lineaDivisoria);
-            System.out.print("|");
-
             for (int columna = 0; columna < TAMAÑO_TABLERO; columna++) {
-                String celda = "          "; // Espacio vacío
-                Soldado soldado = tablero.get(fila).get(columna);
-                
-                if (soldado != null) {
-                    celda = String.format("%-10s", soldado.getNombre()); // Nombre del soldado
+                if (tablero[fila][columna] == null) {
+                    System.out.print("[     ] ");
+                } else {
+                    String nombre = tablero[fila][columna].getNombre();
+                    System.out.print("[" + nombre + "] ");
                 }
-                
-                System.out.print(celda + "|");
             }
             System.out.println();
         }
-        System.out.println(lineaDivisoria); // Línea divisoria final
     }
 
-    // 4. Método para mostrar datos del soldado con mayor nivel de vida de un ejército
-    public Soldado soldadoConMayorVida(ArrayList<Soldado> ejercito) {
-        Soldado maxSoldado = ejercito.get(0);
-        for (Soldado soldado : ejercito) {
-            if (soldado.getNivelVida() > maxSoldado.getNivelVida()) {
-                maxSoldado = soldado;
-            }
-        }
-        return maxSoldado;
+    // 4. Método para obtener el soldado con mayor nivel de vida en un ejército
+    public Soldado soldadoConMayorVida(HashMap<String, Soldado> ejercito) {
+        return Collections.max(ejercito.values(), Comparator.comparingInt(Soldado::getNivelVida));
     }
 
-    // 5. Método para calcular el promedio de nivel de vida de un ejército
-    public double promedioNivelVida(ArrayList<Soldado> ejercito) {
-        int suma = 0;
-        for (Soldado soldado : ejercito) {
-            suma += soldado.getNivelVida();
-        }
+    // 5. Método para calcular el promedio de nivel de vida en un ejército
+    public double promedioNivelVida(HashMap<String, Soldado> ejercito) {
+        int suma = ejercito.values().stream().mapToInt(Soldado::getNivelVida).sum();
         return (double) suma / ejercito.size();
     }
 
