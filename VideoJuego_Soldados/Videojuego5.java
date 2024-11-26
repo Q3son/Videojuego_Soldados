@@ -1,15 +1,15 @@
 import java.util.*;
+
 // BY: SUBIA_EDSON_FP2
 
-public class Videojuego5 {
-
+public class Videojuego4 {
     private static final int TAMAÑO_TABLERO = 10; // Tablero de 10x10
     private Soldado[][] tablero;
     private HashMap<String, Soldado> ejercito1; // NUEVO: HashMap para Ejército 1
     private HashMap<String, Soldado> ejercito2; // NUEVO: HashMap para Ejército 2
 
     // 1. Constructor para inicializar el juego con soldados en ambos ejércitos
-    public Videojuego5(int cantidadSoldadosEjercito1, int cantidadSoldadosEjercito2) {
+    public Videojuego4(int cantidadSoldadosEjercito1, int cantidadSoldadosEjercito2) {
         tablero = new Soldado[TAMAÑO_TABLERO][TAMAÑO_TABLERO];
         ejercito1 = new HashMap<>();
         ejercito2 = new HashMap<>();
@@ -38,7 +38,6 @@ public class Videojuego5 {
             }
         }
     }
-
 
     // 3. Método para mostrar el tablero en la consola
     public void mostrarTablero() {
