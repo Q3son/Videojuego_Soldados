@@ -67,81 +67,49 @@ public class Videojuego5 {
         return (double) suma / ejercito.size();
     }
 
-    // 6. Método para calcular el nivel de vida total de un ejército
-    public int nivelVidaTotal(ArrayList<Soldado> ejercito) {
-        int total = 0;
-        for (Soldado soldado : ejercito) {
-            total += soldado.getNivelVida();
-        }
-        return total;
+    // 6. Método para ordenar soldados usando MergeSort (NUEVO)
+    public List<Soldado> rankingMergeSort(HashMap<String, Soldado> ejercito) {
+        List<Soldado> lista = new ArrayList<>(ejercito.values());
+        mergeSort(lista, 0, lista.size() - 1);
+        return lista;
     }
 
-    // 7. Método para mostrar datos de los soldados de un ejército
-    public void mostrarDatosEjercito(ArrayList<Soldado> ejercito, String nombreEjercito) {
-        System.out.println("Datos de los soldados en " + nombreEjercito + " en orden de creación:");
-        for (Soldado soldado : ejercito) {
-            System.out.println(soldado);
+    private void mergeSort(List<Soldado> lista, int left, int right) {
+        if (left < right) {
+            int mid = (left + right) / 2;
+
+            mergeSort(lista, left, mid);
+            mergeSort(lista, mid + 1, right);
+
+            merge(lista, left, mid, right);
         }
-        System.out.println();
     }
 
-    // 8. Método para ordenar soldados de un ejército por poder (nivel de vida) - Algoritmo de selección (mejorado)
-    public void rankingDePoder(ArrayList<Soldado> ejercito) {
-        for (int i = 0; i < ejercito.size() - 1; i++) {
-            int indexMax = i;
-            Soldado maxSoldado = ejercito.get(i); // Guardar el soldado actual como máximo
-    
-            // Encontrar el soldado con el nivel de vida más alto en la sublista sin ordenar
-            for (int j = i + 1; j < ejercito.size(); j++) {
-                if (ejercito.get(j).getNivelVida() > maxSoldado.getNivelVida()) {
-                    indexMax = j;
-                    maxSoldado = ejercito.get(j);
-                }
-            }
-    
-            // Solo hacer el intercambio si el índice del máximo ha cambiado
-            if (indexMax != i) {
-                ejercito.set(indexMax, ejercito.get(i));
-                ejercito.set(i, maxSoldado);
+    private void merge(List<Soldado> lista, int left, int mid, int right) {
+        List<Soldado> temp = new ArrayList<>(lista);
+        int i = left, j = mid + 1, k = left;
+
+        while (i <= mid && j <= right) {
+            if (temp.get(i).getNivelVida() >= temp.get(j).getNivelVida()) {
+                lista.set(k++, temp.get(i++));
+            } else {
+                lista.set(k++, temp.get(j++));
             }
         }
-    
-        System.out.println("Ranking de poder de soldados en " + (ejercito == ejercito1 ? "Ejército 1" : "Ejército 2") + " (ordenados por nivel de vida):");
-        for (Soldado soldado : ejercito) {
-            System.out.println(soldado);
-        }
-        System.out.println();
-    }
-    // 9. Nuevo método para ordenar soldados de un ejército por nombre (algoritmo de burbuja)
-    public void ordenarPorNombre(ArrayList<Soldado> ejercito) {
-        boolean intercambioRealizado;
-        do {
-            intercambioRealizado = false;
-            for (int i = 0; i < ejercito.size() - 1; i++) {
-                if (ejercito.get(i).getNombre().compareTo(ejercito.get(i + 1).getNombre()) > 0) {
-                    Soldado temp = ejercito.get(i);
-                    ejercito.set(i, ejercito.get(i + 1));
-                    ejercito.set(i + 1, temp);
-                    intercambioRealizado = true;
-                }
-            }
-        } while (intercambioRealizado);
 
-        System.out.println("Soldados en " + (ejercito == ejercito1 ? "Ejército 1" : "Ejército 2") + " ordenados por nombre:");
-        for (Soldado soldado : ejercito) {
-            System.out.println(soldado);
+        while (i <= mid) {
+            lista.set(k++, temp.get(i++));
         }
-        System.out.println();
     }
 
-    // 10. Método para decidir cuál ejército gana la batalla en función del total de vida
+    // 7. Método para determinar el ejército ganador
     public void determinarGanador() {
-        int vidaTotalEjercito1 = nivelVidaTotal(ejercito1);
-        int vidaTotalEjercito2 = nivelVidaTotal(ejercito2);
+        int vidaTotalEjercito1 = ejercito1.values().stream().mapToInt(Soldado::getNivelVida).sum();
+        int vidaTotalEjercito2 = ejercito2.values().stream().mapToInt(Soldado::getNivelVida).sum();
 
         System.out.println("Vida total del Ejército 1: " + vidaTotalEjercito1);
         System.out.println("Vida total del Ejército 2: " + vidaTotalEjercito2);
-        
+
         if (vidaTotalEjercito1 > vidaTotalEjercito2) {
             System.out.println("¡Ejército 1 gana la batalla!");
         } else if (vidaTotalEjercito2 > vidaTotalEjercito1) {
